@@ -1,9 +1,15 @@
-__author__ = ['[Kamil Adamski](https://github.com/adamsqi)']
+__author__ = '[Kamil Adamski](https://github.com/adamsqi)'
 __date__ = '2020.06.21'
 
 """
-A module to assess a difference in memory usage
-between using list comprehensions and generators.
+This module shows a difference in memory usage
+between using list comprehension and generators.
+The results clearly show that list comprehensions
+have excessive memory usage unlike generators.
+The latter use a strictly defined storage space, 
+regardless of the length of iterable. In addition, 
+the computing time for using iterable is much less 
+than list comprehensions.
 
 Results:
 ```
@@ -33,9 +39,9 @@ def timeit(func):
     return wrapper
     
 def main():
-    number = 10**8
-    timeit(generate_suqares_using_list_comprehensions)(number)
-    timeit(generate_suqares_using_generators)(number)
+    arbitrary_number = 10**8
+    timeit(generate_suqares_using_list_comprehensions)(arbitrary_number)
+    timeit(generate_suqares_using_generators)(arbitrary_number)
     
 def calculate_square(number: int):
     """
