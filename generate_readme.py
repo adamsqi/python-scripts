@@ -1,10 +1,14 @@
-__author__ = ['[Kamil Adamski](https://github.com/adamsqi)']
+__author__ = '[Kamil Adamski](https://github.com/adamsqi)'
 __date__ = '2020.06.21'
 
 """
 This is a script for auto generation of README.md content. The script parses all .py script files within the repository and creates a README.md file.
+
+
+Inspired by: [Brandon Amos](https://github.com/bamos/python-scripts/blob/master/README.md)
 """
 
+import ast
 import os
 import re
 
@@ -26,7 +30,6 @@ class ReadmeGenerator():
         
     def generate(self):
         content = self._prepare_content()
-        print('content: {}'.format(content))
         with open('README.md', mode='w') as f:
             ready_content = README_TEMPLATE.format(content=content)
             f.write(ready_content)
@@ -38,22 +41,42 @@ class ReadmeGenerator():
         return content
         
     def _get_all_content_from_scripts(self, script_names: List[str]) -> str:
-        content = ""
+        content = ''
         script_names = sorted(script_names)
         for name in script_names:
-            content += self._read_content_from_single_script(name=name) + '\n'
+            script_link = self._generate_script_link(script_name=name)
+            meta_text = self._parse_single_file(name=name)
+            content += '### ' + script_link + '\n\n' + meta_text + '\n\n\n'
         return content
-                 
-    def _read_content_from_single_script(self, name: str) -> str:
-        return name
         
-    def _open_readme(self):
-        with open('README.md', mode='w') as f:
-            f.write()
+    def _generate_script_link(self, script_name: str) -> str:
+        url_base = 'https://github.com/adamsqi/python-scripts/blob/master/'
+        url = url_base + script_name
+        return f'[{script_name}]({url})'
+    
+    def _parse_single_file(self, name: str) -> str:
+        content = self._read_file(file_path=name)
+        meta_text = self._extract_doc_string(content)
+        return meta_text
+        
+    def _read_file(self, file_path: str) -> str:
+        with open(file_path, mode='r') as f:
+            return f.read()
             
-    def _write_to_readme(self):
-        self._open_readme()
+    def _extract_doc_string(self, content: str) -> str:
+        ast_module = ast.parse(content)
+        ast_f = ast.literal_eval
+        author, date, doc_string = [ast_f(m.value) for m in ast_module.body[0:3]]
         
+        return f"""
++ Author: {author}
+
++ Created at: {date}
+
+#### Description: {doc_string}
+"""
+        
+
 class ValidScriptsFinder():
     
     def __init__(self):
