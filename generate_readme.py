@@ -6,6 +6,7 @@ This is a script for auto generation of README.md content. The script parses all
 """
 
 import os
+import re
 
 from typing import List, Set
 
@@ -31,8 +32,8 @@ class ReadmeGenerator():
             f.write(ready_content)
     
     def _prepare_content(self) -> str:
-        reader = ValidScriptsReader()
-        valid_script_names = reader.read()
+        scripts_finder = ValidScriptsFinder()
+        valid_script_names = scripts_finder.find()
         content = self._get_all_content_from_scripts(script_names=valid_script_names)
         return content
         
@@ -53,12 +54,12 @@ class ReadmeGenerator():
     def _write_to_readme(self):
         self._open_readme()
         
-class ValidScriptsReader():
+class ValidScriptsFinder():
     
     def __init__(self):
         pass
         
-    def read(self) -> List[str]:
+    def find(self) -> List[str]:
         script_names = self._get_valid_script_names_within_cwd()
         return script_names
      
