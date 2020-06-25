@@ -14,7 +14,7 @@ import re
 
 from typing import List, Set
 
-UNPARSABLE_FILES = ['.git', '.gitignore', 'README.md', 'generate_readme.py']
+UNPARSABLE_FILES = ['.git', '.gitignore', 'README.md', 'generate_readme.py', 'LICENSE']
 README_TEMPLATE = """<h1 align="center">Python scripts</h1>
 <div align="center">
 
@@ -38,7 +38,8 @@ class ReadmeGenerator():
         
     def generate(self):
         content = self._prepare_content()
-        with open('README.md', mode='w') as f:
+        parent_dir = self._get_parent_dir_path()
+        with open(os.path.join(parent_dir, 'README.md'), mode='w') as f:
             ready_content = README_TEMPLATE.format(content=content)
             f.write(ready_content)
     
@@ -68,8 +69,13 @@ class ReadmeGenerator():
         return meta_text
         
     def _read_file(self, file_path: str) -> str:
-        with open(file_path, mode='r') as f:
+        parent_dir = self._get_parent_dir_path()
+        with open(os.path.join(parent_dir, 'scripts', file_path), mode='r') as f:
             return f.read()
+            
+    def _get_parent_dir_path(self) -> str:
+        dir_path = os.path.dirname(os.getcwd())
+        return dir_path
             
     def _extract_doc_string(self, content: str) -> str:
         ast_module = ast.parse(content)
@@ -95,17 +101,17 @@ class ValidScriptsFinder():
         return script_names
      
     def _get_valid_script_names_within_cwd(self) -> List[str]:
-        all_file_names = self._get_all_files_within_cwd()
+        all_file_names = self._get_all_files_within_parent_dir()
         file_names = set(all_file_names) - set(UNPARSABLE_FILES)
         valid_file_names = self._exclude_files_with_ignored_extensions(file_names)
         return valid_file_names
         
-    def _get_all_files_within_cwd(self) -> List[str]:
-        files = [file for file in os.listdir(self._get_current_dir_path())]
+    def _get_all_files_within_parent_dir(self) -> List[str]:
+        files = [file for file in os.listdir(os.path.join(self._get_parent_dir_path(), 'scripts'))]
         return files
         
-    def _get_current_dir_path(self) -> str:
-        dir_path = os.getcwd()
+    def _get_parent_dir_path(self) -> str:
+        dir_path = os.path.dirname(os.getcwd())
         return dir_path
         
     def _exclude_files_with_ignored_extensions(self, file_names: Set[str]) -> List[str]:
@@ -114,7 +120,8 @@ class ValidScriptsFinder():
         return result
         
     def _read_git_ignore(self) -> List[str]:
-        with open('.gitignore', mode='r') as f:
+        parent_dir = self._get_parent_dir_path()
+        with open(os.path.join(parent_dir,'.gitignore'), mode='r') as f:
             data = f.read()
         data = data.split('\n')
         data = [el.replace('*', '') for el in data]
