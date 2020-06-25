@@ -59,7 +59,7 @@ class ReadmeGenerator():
         return content
         
     def _generate_script_link(self, script_name: str) -> str:
-        url_base = 'https://github.com/adamsqi/python-scripts/blob/master/'
+        url_base = 'https://github.com/adamsqi/python-scripts/blob/master/scripts/'
         url = url_base + script_name
         return f'[{script_name}]({url})'
     
