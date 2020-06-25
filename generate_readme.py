@@ -15,7 +15,15 @@ import re
 from typing import List, Set
 
 UNPARSABLE_FILES = ['.git', '.gitignore', 'README.md', 'generate_readme.py']
-README_TEMPLATE = """This is a collection of short Python scripts I use as utility tools or just for testing of various features.
+README_TEMPLATE = """<h1 align="center">Python scripts</h1>
+<div align="center">
+
+![Python version](https://img.shields.io/badge/python-3.7+-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
+
+This is a collection of short Python scripts I use as utility tools or just for testing of various features.
 
 {content}
 """

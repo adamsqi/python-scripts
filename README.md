@@ -1,3 +1,11 @@
+<h1 align="center">Python scripts</h1>
+<div align="center">
+
+![Python version](https://img.shields.io/badge/python-3.7+-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
+
 This is a collection of short Python scripts I use as utility tools or just for testing of various features.
 
 ### [compare_memory_usage_lst_comp_v_gen.py](https://github.com/adamsqi/python-scripts/blob/master/compare_memory_usage_lst_comp_v_gen.py)
