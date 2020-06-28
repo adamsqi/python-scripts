@@ -21,12 +21,23 @@ meta:
     class: moo_class
 ```
 
-##### json file (after conversion)
+# json file (after conversion)
 ```json
-[{'meta': {'class': 'foo_class', 'name': 'foo', 'type': 'foo_type'},
-  'object': 'foo'},
- {'meta': {'class': 'moo_class', 'name': 'moo', 'type': 'moo_type'},
-  'object': 'moo'}]
+[{
+    "meta": {
+        "class": "foo_class",
+        "name": "foo",
+        "type": "foo_type"
+    },
+    "object": "foo"
+}, {
+    "meta": {
+        "class": "moo_class",
+        "name": "moo",
+        "type": "moo_type"
+    },
+    "object": "moo"
+}]
 ```
 """
 
