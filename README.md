@@ -36,4 +36,42 @@ get size of function generate_suqares_using_generators results 120
 
 
 
+### [convert_yaml_to_json.py](https://github.com/adamsqi/python-scripts/blob/master/scripts/convert_yaml_to_json.py)
+
+
++ Author: [Kamil Adamski](https://github.com/adamsqi)
+
++ Created at: 2020.06.28
+
+#### Description: 
+This module converts a yaml file to the json file.
+
+Results:
+
+##### yaml file
+```yaml
+object: foo
+meta:
+    name: foo
+    type: foo_type
+    class: foo_class
+---
+object: moo
+meta:
+    name: moo
+    type: moo_type
+    class: moo_class
+```
+
+##### json file (after conversion)
+```json
+[{'meta': {'class': 'foo_class', 'name': 'foo', 'type': 'foo_type'},
+  'object': 'foo'},
+ {'meta': {'class': 'moo_class', 'name': 'moo', 'type': 'moo_type'},
+  'object': 'moo'}]
+```
+
+
+
+
 
