@@ -85,4 +85,30 @@ meta:
 
 
 
+### [create_linked_list.py](https://github.com/adamsqi/python-scripts/blob/master/scripts/create_linked_list.py)
+
+
++ Author: [Kamil Adamski](https://github.com/adamsqi)
+
++ Created at: 2020.07.26
+
+#### Description: 
+This program creates a linked list and prints the total number of nodes.
+
+Program:
+```python
+example_elements = [1, 3, 6, 2, 1, 5]
+linked_list = LinkedList(example_elements)
+linked_list.create()
+linked_list.count_number_of_nodes(linked_list.nodes[0])
+```
+
+Results:
+```python
+Total number of nodes equals to: 6
+```
+
+
+
+
 
