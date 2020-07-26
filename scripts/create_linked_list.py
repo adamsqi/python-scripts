@@ -9,7 +9,8 @@ Program:
 example_elements = [1, 3, 6, 2, 1, 5]
 linked_list = LinkedList(example_elements)
 linked_list.create()
-linked_list.count_number_of_nodes(linked_list.nodes[0])
+head_node = linked_list.nodes[0]
+linked_list.count_number_of_nodes(head=head_node)
 ```
 
 Results:
@@ -54,7 +55,8 @@ def main():
     example_elements = [1, 3, 6, 2, 1, 5]
     linked_list = LinkedList(example_elements)
     linked_list.create()
-    linked_list.count_number_of_nodes(linked_list.nodes[0])
+    head_node = linked_list.nodes[0]
+    linked_list.count_number_of_nodes(head=head_node)
     print(f'Total number of nodes equals to: {linked_list.counter}')
 
 
